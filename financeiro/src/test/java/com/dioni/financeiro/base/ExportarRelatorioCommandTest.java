@@ -5,6 +5,7 @@ import com.dioni.financeiro.base.enums.Categoria;
 import com.dioni.financeiro.base.enums.TipoTransacao;
 import com.dioni.financeiro.base.transacoes.model.Transacao;
 import com.dioni.financeiro.base.transacoes.repository.ExportarRelatorioCommand;
+import com.dioni.financeiro.base.transacoes.repository.RelatorioExcelBuilder;
 import com.dioni.financeiro.base.transacoes.repository.TransacaoQuery;
 import com.dioni.financeiro.support.TestSupport;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ class ExportarRelatorioCommandTest extends TestSupport {
 
     @Override
     public void init() {
-        exportarRelatorioCommand = new ExportarRelatorioCommand(transacaoQuery);
+        exportarRelatorioCommand = new ExportarRelatorioCommand(transacaoQuery, new RelatorioExcelBuilder());
 
         Usuario usuario = new Usuario();
         usuario.setId(1L);

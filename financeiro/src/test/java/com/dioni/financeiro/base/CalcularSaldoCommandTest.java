@@ -70,7 +70,7 @@ class CalcularSaldoCommandTest extends TestSupport {
 
         when(transacaoQuery.filtrarPorMes(mes, ano, 1L)).thenReturn(List.of(t1, t2, t3));
 
-        Double saldoResult = calcularSaldoCommand.executar(Categoria.PROFISSIONAL);
+        Double saldoResult = calcularSaldoCommand.executar(Categoria.PROFISSIONAL, mes, ano);
 
         assertThat(saldoResult).isEqualTo(100.0);
 
@@ -86,7 +86,7 @@ class CalcularSaldoCommandTest extends TestSupport {
 
         when(transacaoQuery.filtrarPorMes(mes, ano, 1L)).thenReturn(List.of());
 
-        Double saldoResult = calcularSaldoCommand.executar(Categoria.PESSOAL);
+        Double saldoResult = calcularSaldoCommand.executar(Categoria.PESSOAL, mes, ano);
 
         assertThat(saldoResult).isEqualTo(0.0);
 

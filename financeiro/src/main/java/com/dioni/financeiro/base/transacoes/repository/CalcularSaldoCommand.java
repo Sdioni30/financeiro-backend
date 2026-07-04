@@ -8,10 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.List;
-
-
 @Service
 @AllArgsConstructor
 public class CalcularSaldoCommand {
@@ -19,10 +15,8 @@ public class CalcularSaldoCommand {
     private final TransacaoRepository transacaoRepository;
     private final TransacaoQuery transacaoQuery;
 
-    public Double executar(Categoria categoria) {
+    public Double executar(Categoria categoria, int mes, int ano) {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        int mes = LocalDate.now().getMonthValue();
-        int ano = LocalDate.now().getYear();
         return transacaoQuery.filtrarPorMes(mes, ano, usuario.getId()).stream()
                 .filter(t -> t.getCategoria().equals(categoria))
                 .mapToDouble(t -> t.getTipo().equals(TipoTransacao.ENTRADA) ? t.getValor() : -t.getValor())
