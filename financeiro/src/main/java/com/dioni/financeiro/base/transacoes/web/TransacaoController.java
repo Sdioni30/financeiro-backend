@@ -9,6 +9,7 @@ import com.dioni.financeiro.base.transacoes.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class TransacaoController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam Categoria categoria,
             @RequestParam(required = false) TipoTransacao tipo) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "data", "id"));
         return ResponseEntity.ok(listarTransacoesCommand.executar(pageable, categoria, tipo));
     }
 
